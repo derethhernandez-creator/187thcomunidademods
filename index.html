@@ -185,13 +185,15 @@
 
         .seccion-header-dinamico { grid-column: 1 / -1; width: 100%; text-align: center; margin-bottom: 40px; padding: 20px; }
 
+        /* [MODIFICADO] TEXTO DE COMPRAS LIMPIO (SIN GLOW NI BORDE) */
         .txt-pedidos-inyectado {
             font-family: 'Orbitron', sans-serif;
             font-size: clamp(1rem, 4vw, 1.5rem);
             color: #fff; text-transform: uppercase; letter-spacing: 3px;
-            text-shadow: 0 0 10px var(--accent); display: inline-block;
+            /* text-shadow REMOVIDO PARA EVITAR CANSANCIO VISUAL */
+            display: inline-block;
             padding-bottom: 10px;
-            border-bottom: 2px solid var(--accent);
+            /* border-bottom REMOVIDO PARA EVITAR CANSANCIO VISUAL */
             margin-bottom: 40px; max-width: 800px;
         }
 
@@ -425,11 +427,11 @@
         /* Slider de Volumen */
         input[type="range"] { -webkit-appearance: none; width: 80px; height: 4px; background: rgba(255,255,255,0.2); border-radius: 5px; outline: none; }
         input[type="range"]::-webkit-slider-thumb { 
-            -webkit-appearance: none; 
+            -webkit-appearance: none;
             width: 18px; /* [MEJORA ANDROID] Un poco más grande para dedos */
-            height: 18px; 
+            height: 18px;
             border-radius: 50%; background: var(--accent);
-            cursor: pointer; box-shadow: 0 0 10px var(--accent); transition: 0.2s; 
+            cursor: pointer; box-shadow: 0 0 10px var(--accent); transition: 0.2s;
         }
         input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.3); }
 
@@ -600,6 +602,7 @@ const DATA = {
     ],
     venta: []
 };
+
 // LÓGICA PARA CAMBIAR EL COLOR + PERSISTENCIA
 let currentThemeIndex = localStorage.getItem('savedThemeIdx') ? parseInt(localStorage.getItem('savedThemeIdx')) : 0;
 // [MEJORADO] Se agregan colores base y transparente para efectos de brillo (destello)
@@ -610,6 +613,7 @@ const themes = [
     { primary: '#ffcc00', dim: 'rgba(255, 204, 0, 0.5)', transparent: 'rgba(255, 204, 0, 0.05)' }, // Gold
     { primary: '#ff0000', dim: 'rgba(255, 0, 0, 0.5)', transparent: 'rgba(255, 0, 0, 0.05)' }     // Red
 ];
+
 function applyTheme(index) {
     const theme = themes[index];
     const root = document.documentElement.style;
@@ -637,9 +641,11 @@ function changeTheme() {
 const canvas = document.getElementById('cyber-canvas');
 const ctx = canvas.getContext('2d');
 let width, height;
+
 function resize() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; }
 window.addEventListener('resize', resize);
 resize();
+
 function loop() {
     ctx.clearRect(0, 0, width, height);
     ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--accent') + '33';
@@ -657,17 +663,17 @@ if(savedVol !== null) {
 }
 
 // [INYECTADO MEJORADO] Lógica Web Audio API con GainNode para Android/iOS
-let audioContext, analyser, dataArray, source, gainNode; // Agregado gainNode
+let audioContext, analyser, dataArray, source, gainNode;
+
+// Agregado gainNode
 
 function setupRealVisualizer() {
     const audioEl = document.getElementById('musica');
     if (!audioContext) {
         audioContext = new (window.AudioContext || window.webkitAudioContext)();
         analyser = audioContext.createAnalyser();
-        
         // 1. Crear nodo de ganancia (Control de volumen real)
         gainNode = audioContext.createGain();
-        
         source = audioContext.createMediaElementSource(audioEl);
         
         // 2. Conexión en cadena: Fuente -> Ganancia -> Analizador -> Altavoces
@@ -695,6 +701,7 @@ function animateBars() {
     
     const bars = document.querySelectorAll('.equalizer .bar');
     if(bars.length < 3) return;
+    
     // Bajos, Medios, Altos
     const val1 = dataArray[2] / 255; 
     const val2 = dataArray[6] / 255;
@@ -704,6 +711,7 @@ function animateBars() {
     bars[0].style.height = Math.max(4, val1 * 25) + 'px';
     bars[1].style.height = Math.max(4, val2 * 35) + 'px';
     bars[2].style.height = Math.max(4, val3 * 25) + 'px';
+    
     bars.forEach((b, i) => {
         const intensity = [val1, val2, val3][i];
         b.style.opacity = 0.5 + (intensity * 0.5);
@@ -776,6 +784,7 @@ function filterContent() {
             card.style.display = "none";
         }
     });
+
     const noResMsg = document.getElementById('no-results');
     if (visibleCount === 0) {
         noResMsg.style.display = 'block';
@@ -790,6 +799,7 @@ function tab(type, btn) {
     
     document.getElementById('mod-search').value = "";
     document.getElementById('no-results').style.display = 'none';
+    
     const searchBar = document.getElementById('search-bar-container');
     const container = document.getElementById('grid-content');
     const header = document.getElementById('seccion-header');
@@ -835,12 +845,8 @@ function tab(type, btn) {
                 let media = i.v ? `<div class="media-box video-box" onclick="loadVideo(this, '${i.v}')"><img class="video-thumbnail" src="https://i.ytimg.com/vi/${i.v}/hqdefault.jpg" loading="lazy"><div class="play-button"></div></div>` : (i.img ? `<div class="media-box"><img src="${i.img}" alt="Preview" onclick="openZoom('${i.img}')" loading="lazy"></div>` : '');
                 
                 // [CORREGIDO] Pass ahora usa la variable dinámica global, no estática
-                let pass = i.p ? `<p style="font-size:13px; margin:8px 0; color:#fff;"><b style="font-family:'Orbitron'; font-weight:900;">CONTRASEÑA:</b> <span class="pass-badge" onclick="copyPass('${i.p}')" style="color:var(--pass-color);
-                font-weight: 900; font-size: 14px; text-shadow: 0 0 5px var(--pass-color);"><i class="fas fa-copy" style="margin-right:5px;
-                font-size:11px;"></i>${i.p}</span></p>` : '';
-                let creator = `<p style="font-size:13px;
-                margin:8px 0; color:#fff;"><b style="font-family:'Orbitron'; font-weight:900;">CREADOR:</b> <span style="font-weight: 900; color: var(--accent); font-size: 14px;
-                text-transform: uppercase;">${i.c}</span></p>`;
+                let pass = i.p ? `<p style="font-size:13px; margin:8px 0; color:#fff;"><b style="font-family:'Orbitron'; font-weight:900;">CONTRASEÑA:</b> <span class="pass-badge" onclick="copyPass('${i.p}')" style="color:var(--pass-color); font-weight: 900; font-size: 14px; text-shadow: 0 0 5px var(--pass-color);"><i class="fas fa-copy" style="margin-right:5px; font-size:11px;"></i>${i.p}</span></p>` : '';
+                let creator = `<p style="font-size:13px; margin:8px 0; color:#fff;"><b style="font-family:'Orbitron'; font-weight:900;">CREADOR:</b> <span style="font-weight: 900; color: var(--accent); font-size: 14px; text-transform: uppercase;">${i.c}</span></p>`;
 
                 // [NUEVO] Generar HTML de etiquetas
                 let tagsHtml = '';
@@ -880,15 +886,52 @@ function toggleAudio() {
 function setVol(v) { 
     // Persistencia
     localStorage.setItem('audioVolume', v);
-    
     // Si existe gainNode (el usuario ya entró), usar Web Audio API para controlar volumen real en móvil
     if(gainNode) {
         gainNode.gain.value = v;
     }
     
     // Fallback estándar para navegadores de escritorio que lo soporten sin problemas
-    audio.volume = v; 
+    audio.volume = v;
 }
+</script>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
 </script>
 </body>
 </html>
