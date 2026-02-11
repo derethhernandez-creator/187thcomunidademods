@@ -194,7 +194,8 @@
             display: inline-block;
             padding-bottom: 10px;
             /* border-bottom REMOVIDO PARA EVITAR CANSANCIO VISUAL */
-            margin-bottom: 40px; max-width: 800px;
+            margin-bottom: 40px;
+            max-width: 800px;
         }
 
         .soporte-serio { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-top: 20px; }
@@ -347,9 +348,11 @@
             background: var(--accent-transparent);
             border: 1px dashed var(--accent-dim); text-align: center; border-radius: 20px;
         }
-        .encontrarnos h2 { font-family: 'Orbitron'; color: var(--accent); margin-bottom: 25px; letter-spacing: 3px; }
+        .encontrarnos h2 { font-family: 'Orbitron';
+            color: var(--accent); margin-bottom: 25px; letter-spacing: 3px; }
         
-        .social-links { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+        .social-links { display: flex;
+            justify-content: center; gap: 20px; flex-wrap: wrap; }
         
         .social-btn {
             padding: 12px 25px;
@@ -425,7 +428,9 @@
         #btn-music:hover { transform: scale(1.1); background: #fff; }
 
         /* Slider de Volumen */
-        input[type="range"] { -webkit-appearance: none; width: 80px; height: 4px; background: rgba(255,255,255,0.2); border-radius: 5px; outline: none; }
+        input[type="range"] { -webkit-appearance: none;
+            width: 80px; height: 4px; background: rgba(255,255,255,0.2); border-radius: 5px; outline: none;
+        }
         input[type="range"]::-webkit-slider-thumb { 
             -webkit-appearance: none;
             width: 18px; /* [MEJORA ANDROID] Un poco más grande para dedos */
@@ -507,8 +512,8 @@
 
 <div class="bg-glow"></div><canvas id="cyber-canvas"></canvas><div id="copy-notif" class="copy-toast">¡CONTRASEÑA COPIADA!</div>
 
-<audio id="click-sound" src="https://files.catbox.moe/g053j3.mp3"></audio>
-<audio id="musica" loop crossorigin="anonymous" src="https://files.catbox.moe/yg3iwc.mp3"></audio>
+<audio id="click-sound" src="https://www.soundjay.com/buttons/sounds/button-30.mp3"></audio>
+<audio id="musica" loop crossorigin="anonymous" src="https://files.catbox.moe/5cm6a3.mp3"></audio>
 
 <div id="intro-overlay">
     <img src="https://i.postimg.cc/k4YWk9Sw/a779679ec40164b9b49a56487828cad2.gif" style="width:200px; margin-bottom:20px;">
@@ -602,7 +607,6 @@ const DATA = {
     ],
     venta: []
 };
-
 // LÓGICA PARA CAMBIAR EL COLOR + PERSISTENCIA
 let currentThemeIndex = localStorage.getItem('savedThemeIdx') ? parseInt(localStorage.getItem('savedThemeIdx')) : 0;
 // [MEJORADO] Se agregan colores base y transparente para efectos de brillo (destello)
@@ -613,7 +617,6 @@ const themes = [
     { primary: '#ffcc00', dim: 'rgba(255, 204, 0, 0.5)', transparent: 'rgba(255, 204, 0, 0.05)' }, // Gold
     { primary: '#ff0000', dim: 'rgba(255, 0, 0, 0.5)', transparent: 'rgba(255, 0, 0, 0.05)' }     // Red
 ];
-
 function applyTheme(index) {
     const theme = themes[index];
     const root = document.documentElement.style;
@@ -635,17 +638,17 @@ function changeTheme() {
     currentThemeIndex = (currentThemeIndex + 1) % themes.length;
     applyTheme(currentThemeIndex);
     localStorage.setItem('savedThemeIdx', currentThemeIndex);
-    document.getElementById('click-sound').play();
+    // Safe play click
+    const clickSnd = document.getElementById('click-sound');
+    if(clickSnd) { clickSnd.volume = 0.5; clickSnd.play().catch(e=>{}); }
 }
 
 const canvas = document.getElementById('cyber-canvas');
 const ctx = canvas.getContext('2d');
 let width, height;
-
 function resize() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; }
 window.addEventListener('resize', resize);
 resize();
-
 function loop() {
     ctx.clearRect(0, 0, width, height);
     ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--accent') + '33';
@@ -662,60 +665,74 @@ if(savedVol !== null) {
     document.getElementById('vol-slider').value = savedVol;
 }
 
-// [INYECTADO MEJORADO] Lógica Web Audio API con GainNode para Android/iOS
+// [INYECTADO MEJORADO] Lógica Web Audio API con GainNode para Android/iOS y FALLBACK
 let audioContext, analyser, dataArray, source, gainNode;
-
-// Agregado gainNode
+let visualizerActive = false; // Flag para saber si el visualizador pudo arrancar
 
 function setupRealVisualizer() {
     const audioEl = document.getElementById('musica');
     if (!audioContext) {
-        audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        analyser = audioContext.createAnalyser();
-        // 1. Crear nodo de ganancia (Control de volumen real)
-        gainNode = audioContext.createGain();
-        source = audioContext.createMediaElementSource(audioEl);
-        
-        // 2. Conexión en cadena: Fuente -> Ganancia -> Analizador -> Altavoces
-        source.connect(gainNode);
-        gainNode.connect(analyser);
-        analyser.connect(audioContext.destination);
-        
-        // 3. Aplicar volumen inicial
-        const savedVol = localStorage.getItem('audioVolume') || 0.5;
-        gainNode.gain.value = savedVol;
-        
-        analyser.fftSize = 64; 
-        const bufferLength = analyser.frequencyBinCount;
-        dataArray = new Uint8Array(bufferLength);
-        
-        animateBars();
+        try {
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            analyser = audioContext.createAnalyser();
+            // 1. Crear nodo de ganancia (Control de volumen real)
+            gainNode = audioContext.createGain();
+            
+            // INTENTO CONECTAR EL AUDIO AL VISUALIZADOR
+            // NOTA: Si el servidor de música no tiene CORS perfecto, esto fallará.
+            source = audioContext.createMediaElementSource(audioEl);
+            
+            source.connect(gainNode);
+            gainNode.connect(analyser);
+            analyser.connect(audioContext.destination);
+            
+            visualizerActive = true; // Éxito, el visualizador funcionará
+
+            // 3. Aplicar volumen inicial
+            const savedVol = localStorage.getItem('audioVolume') || 0.5;
+            gainNode.gain.value = savedVol;
+            
+            analyser.fftSize = 64; 
+            const bufferLength = analyser.frequencyBinCount;
+            dataArray = new Uint8Array(bufferLength);
+            
+            animateBars();
+        } catch(error) {
+            console.log("Audio Context Error (Posiblemente CORS o Navegador Restrictivo):", error);
+            // FALLBACK: Si falla el setup visual, simplemente marcamos visualizerActive como false
+            // La música se reproducirá de forma estándar sin pasar por el Web Audio API
+            visualizerActive = false;
+            // Aplicamos volumen directo al elemento HTML
+            audioEl.volume = localStorage.getItem('audioVolume') || 0.5;
+        }
     } else if (audioContext.state === 'suspended') {
         audioContext.resume();
     }
 }
 
 function animateBars() {
+    if(!visualizerActive) return; // Si falló el setup, no intentamos animar para ahorrar recursos
     requestAnimationFrame(animateBars);
-    analyser.getByteFrequencyData(dataArray);
     
-    const bars = document.querySelectorAll('.equalizer .bar');
-    if(bars.length < 3) return;
-    
-    // Bajos, Medios, Altos
-    const val1 = dataArray[2] / 255; 
-    const val2 = dataArray[6] / 255;
-    const val3 = dataArray[12] / 255; 
+    if(analyser) {
+        analyser.getByteFrequencyData(dataArray);
+        
+        const bars = document.querySelectorAll('.equalizer .bar');
+        if(bars.length < 3) return;
+        // Bajos, Medios, Altos
+        const val1 = dataArray[2] / 255; 
+        const val2 = dataArray[6] / 255;
+        const val3 = dataArray[12] / 255; 
 
-    // Alturas dinámicas reales
-    bars[0].style.height = Math.max(4, val1 * 25) + 'px';
-    bars[1].style.height = Math.max(4, val2 * 35) + 'px';
-    bars[2].style.height = Math.max(4, val3 * 25) + 'px';
-    
-    bars.forEach((b, i) => {
-        const intensity = [val1, val2, val3][i];
-        b.style.opacity = 0.5 + (intensity * 0.5);
-    });
+        // Alturas dinámicas reales
+        bars[0].style.height = Math.max(4, val1 * 25) + 'px';
+        bars[1].style.height = Math.max(4, val2 * 35) + 'px';
+        bars[2].style.height = Math.max(4, val3 * 25) + 'px';
+        bars.forEach((b, i) => {
+            const intensity = [val1, val2, val3][i];
+            b.style.opacity = 0.5 + (intensity * 0.5);
+        });
+    }
 }
 
 function updateOnline() {
@@ -726,11 +743,13 @@ function updateOnline() {
 }
 
 function init() {
-    document.getElementById('click-sound').play();
+    // Intentar reproducir click
+    const clickSnd = document.getElementById('click-sound');
+    if(clickSnd) { clickSnd.volume = 0.5; clickSnd.play().catch(e => console.log("Click play failed")); }
     
     // INYECCIÓN: INICIAR AUDIO CONTEXTO AQUÍ
-    try { setupRealVisualizer();
-    } catch(e) { console.log("AudioContext blocked"); }
+    // Es CRUCIAL hacerlo dentro del evento click del usuario
+    setupRealVisualizer();
 
     document.getElementById('intro-overlay').style.opacity = '0';
     setTimeout(() => {
@@ -746,9 +765,17 @@ function init() {
         tab('equipo', document.querySelector('.menu button'));
     
         loop();
+        
+        // INTENTO DE PLAY FINAL
+        // Si el visualizador falló (visualizerActive = false), esto reproduce el audio normal
+        // Si el visualizador funcionó, el audio fluye a través del grafo de nodos
         audio.play().then(() => {
             btnIcon.className = 'fas fa-pause';
-        }).catch(e => console.log("Audio Bloqueado"));
+        }).catch(e => {
+            console.log("AutoPlay Bloqueado por navegador, usuario debe dar play manual");
+            btnIcon.className = 'fas fa-play';
+        });
+
     }, 600);
 }
 
@@ -784,7 +811,6 @@ function filterContent() {
             card.style.display = "none";
         }
     });
-
     const noResMsg = document.getElementById('no-results');
     if (visibleCount === 0) {
         noResMsg.style.display = 'block';
@@ -799,7 +825,6 @@ function tab(type, btn) {
     
     document.getElementById('mod-search').value = "";
     document.getElementById('no-results').style.display = 'none';
-    
     const searchBar = document.getElementById('search-bar-container');
     const container = document.getElementById('grid-content');
     const header = document.getElementById('seccion-header');
@@ -886,54 +911,13 @@ function toggleAudio() {
 function setVol(v) { 
     // Persistencia
     localStorage.setItem('audioVolume', v);
-    // Si existe gainNode (el usuario ya entró), usar Web Audio API para controlar volumen real en móvil
-    if(gainNode) {
+    // 1. Intentar cambiar volumen del GainNode (Visualizador Activo)
+    if(gainNode && visualizerActive) {
         gainNode.gain.value = v;
     }
-    
-    // Fallback estándar para navegadores de escritorio que lo soporten sin problemas
+    // 2. SIEMPRE cambiar volumen del elemento Audio HTML por si acaso el visualizador falló
     audio.volume = v;
 }
 </script>
-<!-- Code injected by live-server -->
-<script>
-	// <![CDATA[  <-- For SVG support
-	if ('WebSocket' in window) {
-		(function () {
-			function refreshCSS() {
-				var sheets = [].slice.call(document.getElementsByTagName("link"));
-				var head = document.getElementsByTagName("head")[0];
-				for (var i = 0; i < sheets.length; ++i) {
-					var elem = sheets[i];
-					var parent = elem.parentElement || head;
-					parent.removeChild(elem);
-					var rel = elem.rel;
-					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
-						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
-						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
-					}
-					parent.appendChild(elem);
-				}
-			}
-			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
-			var address = protocol + window.location.host + window.location.pathname + '/ws';
-			var socket = new WebSocket(address);
-			socket.onmessage = function (msg) {
-				if (msg.data == 'reload') window.location.reload();
-				else if (msg.data == 'refreshcss') refreshCSS();
-			};
-			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
-				console.log('Live reload enabled.');
-				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
-			}
-		})();
-	}
-	else {
-		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
-	}
-	// ]]>
-</script>
 </body>
 </html>
-
-
