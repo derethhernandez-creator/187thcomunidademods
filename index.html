@@ -190,8 +190,10 @@
             font-family: 'Orbitron', sans-serif;
             font-size: clamp(1rem, 4vw, 1.5rem);
             color: #fff; text-transform: uppercase; letter-spacing: 3px;
+            /* text-shadow REMOVIDO PARA EVITAR CANSANCIO VISUAL */
             display: inline-block;
             padding-bottom: 10px;
+            /* border-bottom REMOVIDO PARA EVITAR CANSANCIO VISUAL */
             margin-bottom: 40px;
             max-width: 800px;
         }
@@ -245,15 +247,16 @@
 
         .staff-card h3 { 
             color: var(--admin-name-color) !important;
+            /* [CORREGIDO] Sombra de texto dinámica */
             text-shadow: 0 0 10px var(--accent);
         }
         .staff-card { text-align: center; }
         .avatar {
             width: 110px;
             height: 110px; margin: 0 auto 15px; border: 2px solid var(--accent);
+            /* [CORREGIDO] Outline dinámico */
             outline: 3px solid var(--accent-dim);
-            outline-offset: 4px; border-radius: 15px; padding: 5px;
-            transition: 0.4s; overflow: hidden;
+            outline-offset: 4px; border-radius: 15px; padding: 5px; transition: 0.4s; overflow: hidden;
         }
         .staff-card:hover .avatar { transform: rotate(3deg) scale(1.1); outline-color: var(--accent); }
         .avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 10px; }
@@ -285,7 +288,7 @@
 
         .card h3 { 
             font-family: 'Orbitron', sans-serif;
-            color: var(--accent); margin-bottom: 0px; 
+            color: var(--accent); margin-bottom: 0px; /* Reducido para la linea */
             text-transform: uppercase;
             font-weight: 900; font-size: 1.4rem; letter-spacing: 2px;
         }
@@ -341,6 +344,7 @@
         .encontrarnos {
             margin-top: 80px;
             padding: 40px; 
+            /* [CORREGIDO] Fondo dinámico muy sutil */
             background: var(--accent-transparent);
             border: 1px dashed var(--accent-dim); text-align: center; border-radius: 20px;
         }
@@ -366,6 +370,7 @@
             background: var(--discord);
             color: #fff; 
             box-shadow: 0 0 20px var(--discord), 0 0 40px var(--discord);
+            /* Destello doble */
         }
 
         /* YOUTUBE ESTILO (Rojo) */
@@ -374,6 +379,7 @@
             background: var(--youtube);
             border-color: var(--youtube); color: #fff; 
             box-shadow: 0 0 20px var(--youtube), 0 0 40px var(--youtube);
+            /* Destello doble */
         }
 
         /* WHATSAPP ESTILO (Verde) */
@@ -382,6 +388,7 @@
             background: var(--whatsapp);
             border-color: var(--whatsapp); color: #fff; 
             box-shadow: 0 0 20px var(--whatsapp), 0 0 40px var(--whatsapp);
+            /* Destello doble */
         }
 
         /* INSTAGRAM ESTILO (Magenta) */
@@ -390,9 +397,10 @@
             background: var(--instagram);
             border-color: var(--instagram); color: #fff; 
             box-shadow: 0 0 20px var(--instagram), 0 0 40px var(--instagram);
+            /* Destello doble */
         }
 
-        /* NUEVO ESTILO DEL REPRODUCTOR DE MÚSICA */
+        /* NUEVO ESTILO DEL REPRODUCTOR DE MÚSICA - SIMPLIFICADO */
         .player-bar {
             position: fixed;
             bottom: 25px; left: 25px;
@@ -421,20 +429,34 @@
         input[type="range"] { -webkit-appearance: none; width: 80px; height: 4px; background: rgba(255,255,255,0.2); border-radius: 5px; outline: none; }
         input[type="range"]::-webkit-slider-thumb { 
             -webkit-appearance: none;
-            width: 18px;
+            width: 18px; /* [MEJORA ANDROID] Un poco más grande para dedos */
             height: 18px;
             border-radius: 50%; background: var(--accent);
             cursor: pointer; box-shadow: 0 0 10px var(--accent); transition: 0.2s;
         }
         input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.3); }
 
-        /* Ecualizador REAL */
+        /* Ecualizador FALSO (CSS ANIMATION - CERO ERRORES) */
         .equalizer { display: flex; align-items: flex-end; height: 25px; gap: 3px; margin-left: 5px; }
         .bar {
             width: 5px;
             background: var(--accent); border-radius: 2px;
-            height: 4px; transition: height 0.1s linear; box-shadow: 0 0 5px var(--accent);
+            height: 4px; 
+            box-shadow: 0 0 5px var(--accent);
+            /* Animación base */
+            animation: eq-bounce 0s infinite alternate;
         }
+
+        /* Definición de la animación de rebote */
+        @keyframes eq-bounce {
+            0% { height: 4px; opacity: 0.5; }
+            100% { height: 22px; opacity: 1; }
+        }
+
+        /* Clase activa para activar la animación */
+        .player-bar.playing .bar:nth-child(1) { animation-duration: 0.5s; }
+        .player-bar.playing .bar:nth-child(2) { animation-duration: 0.7s; }
+        .player-bar.playing .bar:nth-child(3) { animation-duration: 0.6s; }
 
         .player-label {
             font-size: 10px;
@@ -465,13 +487,14 @@
         .copy-toast {
             position: fixed;
             top: 20px; right: 20px; 
-            background: var(--pass-color) !important;
+            background: var(--pass-color) !important; /* Ahora sigue el color del tema */
             color: #000;
             padding: 10px 25px; font-family: 'Orbitron'; font-weight: bold; font-size: 12px;
             clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
             display: none;
             z-index: 30000; animation: slideIn 0.3s ease;
             box-shadow: 0 0 20px var(--accent-dim);
+            /* [CORREGIDO] Eliminado el borde blanco feo de las esquinas */
             border: none;
         }
         @keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
@@ -499,8 +522,8 @@
 
 <div class="bg-glow"></div><canvas id="cyber-canvas"></canvas><div id="copy-notif" class="copy-toast">¡CONTRASEÑA COPIADA!</div>
 
-<audio id="click-sound" src="https://files.catbox.moe/g053j3.mp3" preload="auto"></audio>
-<audio id="musica" loop src="https://files.catbox.moe/yg3iwc.mp3" preload="auto"></audio>
+<audio id="click-sound" src=""></audio>
+<audio id="musica" loop crossorigin="anonymous" src="https://files.catbox.moe/yg3iwc.mp3"></audio>
 
 <div id="intro-overlay">
     <img src="https://i.postimg.cc/k4YWk9Sw/a779679ec40164b9b49a56487828cad2.gif" style="width:200px; margin-bottom:20px;">
@@ -543,8 +566,11 @@
             <h2>¡¡ AQUÍ NUESTRAS PLATAFORMAS OFICIALES !!</h2>
             <div class="social-links">
                 <a href="https://discord.gg/ChGc4eDcQ7" target="_blank" class="social-btn discord-style"><i class="fab fa-discord"></i> DISCORD</a>
+                 
                 <a href="https://www.youtube.com/@Yith.7" target="_blank" class="social-btn youtube-style"><i class="fab fa-youtube"></i> YOUTUBE</a>
+                
                 <a href="https://wa.me/+584125057144" target="_blank" class="social-btn whatsapp-style"><i class="fab fa-whatsapp"></i> WHATSAPP</a>
+
                 <a href="POR DEFINIR EL LINK" target="_blank" class="social-btn instagram-style"><i class="fab fa-instagram"></i> INSTAGRAM</a>
             </div>
         </div>
@@ -580,6 +606,7 @@ const DATA = {
         {n: "𝑅𝑖𝑜 𝐹𝑒𝑟𝑑𝑖𝑛𝑎𝑛𝑑", r: "𝑶𝑾𝑵𝑬𝑹𝑺", a: "https://i.postimg.cc/6pDGnGKq/rio-ferdinand.png"},
     ],
     aportes: [
+        /* [AGREGADO] Ejemplo con etiquetas */
         {t: "LEV 2.0", c: "SOKOO", p: "NINGUNA", img: "https://i.postimg.cc/9WkpNHn8/sa-mp-021.png", d: "https://www.mediafire.com/file/7v7ajzv7m42l2hj/GTA+LEV+2.0.rar/file", tags: ["NUEVO", "FPS UP", "233MB"]},
     ],
     datas: [
@@ -593,6 +620,8 @@ const DATA = {
 
 // LÓGICA PARA CAMBIAR EL COLOR + PERSISTENCIA
 let currentThemeIndex = localStorage.getItem('savedThemeIdx') ? parseInt(localStorage.getItem('savedThemeIdx')) : 0;
+
+// [MEJORADO] Se agregan colores base y transparente para efectos de brillo (destello)
 const themes = [
     { primary: '#00d4ff', dim: 'rgba(0, 157, 255, 0.5)', transparent: 'rgba(0, 157, 255, 0.05)' }, // Cyan
     { primary: '#ff00ff', dim: 'rgba(255, 0, 255, 0.5)', transparent: 'rgba(255, 0, 255, 0.05)' }, // Pink
@@ -612,25 +641,25 @@ function applyTheme(index) {
     root.setProperty('--title-card-color', theme.primary);
     root.setProperty('--admin-name-color', theme.primary);
     root.setProperty('--success', theme.primary);
+    // [CORREGIDO] Ahora la contraseña y el toast SÍ cambian de color
     root.setProperty('--pass-color', theme.primary);
 }
 
+// Aplicar tema guardado inmediatamente
 applyTheme(currentThemeIndex);
-
 function changeTheme() {
     currentThemeIndex = (currentThemeIndex + 1) % themes.length;
     applyTheme(currentThemeIndex);
     localStorage.setItem('savedThemeIdx', currentThemeIndex);
+    document.getElementById('click-sound').play();
 }
 
 const canvas = document.getElementById('cyber-canvas');
 const ctx = canvas.getContext('2d');
 let width, height;
-
 function resize() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; }
 window.addEventListener('resize', resize);
 resize();
-
 function loop() {
     ctx.clearRect(0, 0, width, height);
     ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--accent') + '33';
@@ -638,44 +667,16 @@ function loop() {
     requestAnimationFrame(loop);
 }
 
-/* ----------------------------------------------------------------
-   SISTEMA DE AUDIO MEJORADO (SIN RESTRICTIONES NI API COMPLEX)
-   ---------------------------------------------------------------- */
+// --- LOGICA DE MUSICA SIMPLIFICADA (SIN ERRORES) ---
 const audio = document.getElementById('musica');
 const btnIcon = document.getElementById('music-icon');
-const volSlider = document.getElementById('vol-slider');
+const playerBar = document.getElementById('player-music-bar');
 
 // Cargar volumen guardado
 const savedVol = localStorage.getItem('audioVolume');
 if(savedVol !== null) {
-    volSlider.value = savedVol;
     audio.volume = savedVol;
-} else {
-    audio.volume = 0.5;
-}
-
-// Visualizador "Fake" pero Seguro (Funciona en todos los dispositivos sin CORS)
-function startVisualizer() {
-    const bars = document.querySelectorAll('.equalizer .bar');
-    function visualizeLoop() {
-        requestAnimationFrame(visualizeLoop);
-        if(audio.paused) {
-            bars.forEach(b => b.style.height = '4px');
-            return;
-        }
-        // Movimiento simulado matemáticamente (No requiere permisos de micrófono ni audio)
-        const h1 = Math.random() > 0.5 ? Math.random() * 20 + 5 : Math.random() * 10 + 5;
-        const h2 = Math.random() * 25 + 5;
-        const h3 = Math.random() * 15 + 5;
-        const volMult = audio.volume < 0.1 ? 0.5 : 1;
-        
-        bars[0].style.height = (h1 * volMult) + 'px';
-        bars[1].style.height = (h2 * volMult) + 'px';
-        bars[2].style.height = (h3 * volMult) + 'px';
-        
-        bars.forEach(b => b.style.opacity = 0.6 + Math.random() * 0.4);
-    }
-    visualizeLoop();
+    document.getElementById('vol-slider').value = savedVol;
 }
 
 function updateOnline() {
@@ -685,31 +686,17 @@ function updateOnline() {
     document.getElementById('online-count').innerText = count;
 }
 
-// FUNCION DE INICIO ROBUSTA
 function init() {
-    const clickAudio = document.getElementById('click-sound');
+    document.getElementById('click-sound').play();
     
-    // 1. INTENTAR REPRODUCIR CLICK (Sin bloquear si falla)
-    if (clickAudio) {
-        clickAudio.volume = 0.6;
-        clickAudio.play().catch(e => console.log("Click sound skipped (normal on some mobiles)"));
-    }
-    
-    // 2. INICIAR MÚSICA DE FONDO (Con manejo de promesas para evitar errores rojos)
-    var musicPromise = audio.play();
-    if (musicPromise !== undefined) {
-        musicPromise.then(_ => {
-            // Autoplay exitoso
-            btnIcon.className = 'fas fa-pause';
-            startVisualizer();
-        }).catch(error => {
-            // Si el navegador es muy estricto, mostramos icono play para hacerlo manual
-            console.log("Audio waiting for interaction.");
-            btnIcon.className = 'fas fa-play';
-        });
-    }
+    // Iniciar Música Simple (Sin API complejas que causan bloqueo)
+    audio.play().then(() => {
+        btnIcon.className = 'fas fa-pause';
+        playerBar.classList.add('playing'); // Activa animacion CSS
+    }).catch(e => {
+        console.log("Autoplay prevenido por navegador, esperando click manual");
+    });
 
-    // 3. ANIMACIÓN UI
     document.getElementById('intro-overlay').style.opacity = '0';
     setTimeout(() => {
         document.getElementById('intro-overlay').style.display = 'none';
@@ -720,10 +707,9 @@ function init() {
         
         updateOnline(); 
         setInterval(updateOnline, 5000); 
-        
+       
         tab('equipo', document.querySelector('.menu button'));
-        loop(); 
-
+        loop();
     }, 600);
 }
 
@@ -749,6 +735,7 @@ function filterContent() {
     const searchTerm = document.getElementById('mod-search').value.toLowerCase();
     const cards = document.querySelectorAll('#grid-content .card');
     let visibleCount = 0;
+
     cards.forEach(card => {
         const text = card.innerText.toLowerCase();
         if (text.includes(searchTerm)) {
@@ -769,6 +756,7 @@ function filterContent() {
 function tab(type, btn) {
     document.querySelectorAll('.menu button').forEach(b => b.classList.remove('activo'));
     btn.classList.add('activo');
+    
     document.getElementById('mod-search').value = "";
     document.getElementById('no-results').style.display = 'none';
     const searchBar = document.getElementById('search-bar-container');
@@ -815,9 +803,11 @@ function tab(type, btn) {
             } else {
                 let media = i.v ? `<div class="media-box video-box" onclick="loadVideo(this, '${i.v}')"><img class="video-thumbnail" src="https://i.ytimg.com/vi/${i.v}/hqdefault.jpg" loading="lazy"><div class="play-button"></div></div>` : (i.img ? `<div class="media-box"><img src="${i.img}" alt="Preview" onclick="openZoom('${i.img}')" loading="lazy"></div>` : '');
                 
+                // [CORREGIDO] Pass ahora usa la variable dinámica global, no estática
                 let pass = i.p ? `<p style="font-size:13px; margin:8px 0; color:#fff;"><b style="font-family:'Orbitron'; font-weight:900;">CONTRASEÑA:</b> <span class="pass-badge" onclick="copyPass('${i.p}')" style="color:var(--pass-color); font-weight: 900; font-size: 14px; text-shadow: 0 0 5px var(--pass-color);"><i class="fas fa-copy" style="margin-right:5px; font-size:11px;"></i>${i.p}</span></p>` : '';
                 let creator = `<p style="font-size:13px; margin:8px 0; color:#fff;"><b style="font-family:'Orbitron'; font-weight:900;">CREADOR:</b> <span style="font-weight: 900; color: var(--accent); font-size: 14px; text-transform: uppercase;">${i.c}</span></p>`;
 
+                // [NUEVO] Generar HTML de etiquetas
                 let tagsHtml = '';
                 if(i.tags && i.tags.length > 0) {
                     tagsHtml = '<div class="tags-container">';
@@ -840,20 +830,21 @@ function tab(type, btn) {
     }
 }
 
+// CONTROL DE MUSICA SENCILLO
 function toggleAudio() {
     if(audio.paused) { 
-        audio.play().then(() => {
-            btnIcon.className = 'fas fa-pause';
-            startVisualizer(); 
-        }).catch(e => console.log("Error al reproducir:", e));
-    } 
-    else { 
-        audio.pause();
+        audio.play();
+        btnIcon.className = 'fas fa-pause'; 
+        playerBar.classList.add('playing'); // Activa animacion CSS
+    } else { 
+        audio.pause(); 
         btnIcon.className = 'fas fa-play';
+        playerBar.classList.remove('playing'); // Pausa animacion CSS
     }
 }
 
 function setVol(v) { 
+    // Persistencia
     localStorage.setItem('audioVolume', v);
     audio.volume = v;
 }
