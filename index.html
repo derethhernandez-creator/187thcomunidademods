@@ -47,8 +47,7 @@
         }
 
         .bg-glow {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(rgba(0,0,0,0.92), rgba(0,0,0,0.85)), 
                         url("https://i.postimg.cc/C182BR36/646d1a854ef5798608d3d481cb3d5af3.jpg") no-repeat;
             background-size: cover; background-position: center;
@@ -59,8 +58,7 @@
 
         /* Botón de tema */
         #btn-color-theme {
-            position: fixed;
-            top: 20px; right: 20px;
+            position: fixed; top: 20px; right: 20px;
             background: rgba(0,0,0,0.6); 
             border: 1px solid var(--accent); 
             color: var(--accent); 
@@ -74,8 +72,7 @@
         #btn-color-theme:hover { background: var(--accent); color: #000; transform: rotate(180deg); box-shadow: 0 0 25px var(--accent); }
 
         .status-live {
-            position: fixed;
-            top: 20px; left: 20px;
+            position: fixed; top: 20px; left: 20px;
             display: none; align-items: center; gap: 10px;
             font-family: 'Orbitron'; font-size: 10px;
             background: rgba(0,0,0,0.7); padding: 8px 15px;
@@ -83,8 +80,7 @@
             z-index: 1001;
         }
         .status-dot {
-            width: 8px;
-            height: 8px; background: #00ff00;
+            width: 8px; height: 8px; background: #00ff00;
             border-radius: 50%; box-shadow: 0 0 10px #00ff00;
             animation: pulse-green 1.5s infinite;
         }
@@ -95,16 +91,14 @@
         }
 
         #intro-overlay {
-            position: fixed;
-            inset: 0; background: #000; z-index: 10000;
+            position: fixed; inset: 0; background: #000; z-index: 10000;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             transition: 0.8s ease-in-out;
         }
         
         /* === BOTÓN ESTILO "NEON GHOST" === */
         .enter-btn {
-            position: relative;
-            background: transparent; 
+            position: relative; background: transparent; 
             border: 2px dashed var(--accent); color: #fff;
             padding: 15px 40px; font-family: 'Orbitron';
             font-weight: 900; font-size: 1.2rem; cursor: pointer;
@@ -119,8 +113,7 @@
         .enter-btn i, .enter-btn span { transform: skewX(15deg); display: inline-block; transition: 0.3s; }
         .enter-btn i { font-size: 1.3rem; color: var(--accent); text-shadow: 0 0 10px var(--accent); }
         .enter-btn:hover {
-            background: var(--accent);
-            color: #000; border-style: solid; 
+            background: var(--accent); color: #000; border-style: solid; 
             box-shadow: 0 0 30px var(--accent-glow), 0 0 60px var(--accent-dim);
             letter-spacing: 8px; transform: skewX(-15deg) scale(1.05); text-shadow: none;
         }
@@ -130,8 +123,7 @@
         
         /* GLITCH FONT */
         .titulo {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 900;
+            font-family: 'Orbitron', sans-serif; font-weight: 900;
             font-size: clamp(3rem, 15vw, 7.5rem); letter-spacing: 12px;
             line-height: 1; text-transform: uppercase; color: #fff;
             position: relative; display: inline-block;
@@ -139,8 +131,7 @@
             animation: glitch-skew 3s infinite linear alternate-reverse;
         }
         .titulo::before, .titulo::after {
-            content: "187-TH";
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.8;
+            content: "187-TH"; position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.8;
         }
         .titulo::before { color: #ff00de; z-index: -1; animation: glitch-anim-1 2.5s infinite linear alternate-reverse; }
         .titulo::after { color: var(--accent); z-index: -2; animation: glitch-anim-2 3s infinite linear alternate-reverse; }
@@ -166,16 +157,14 @@
         }
 
         .subtitulo {
-            display: inline-block;
-            background: var(--accent); color: #000000;
+            display: inline-block; background: var(--accent); color: #000000;
             padding: 5px 20px; font-weight: 900; font-size: 10px; letter-spacing: 5px;
             margin-top: 15px; transform: skewX(-15deg);
         }
 
         .search-container { max-width: 600px; margin: 20px auto; padding: 0 20px; position: relative; }
         .search-input {
-            width: 100%;
-            background: rgba(0, 0, 0, 0.6);
+            width: 100%; background: rgba(0, 0, 0, 0.6);
             border: 1px solid var(--accent-dim); padding: 12px 45px 12px 15px;
             color: #fff; font-family: 'Orbitron'; font-size: 13px;
             outline: none; transition: 0.3s; border-radius: 5px; text-transform: uppercase;
@@ -187,25 +176,21 @@
 
         /* [MODIFICADO] TEXTO DE COMPRAS LIMPIO (SIN GLOW NI BORDE) */
         .txt-pedidos-inyectado {
-            font-family: 'Orbitron', sans-serif;
-            font-size: clamp(1rem, 4vw, 1.5rem);
+            font-family: 'Orbitron', sans-serif; font-size: clamp(1rem, 4vw, 1.5rem);
             color: #fff; text-transform: uppercase; letter-spacing: 3px;
             /* text-shadow REMOVIDO PARA EVITAR CANSANCIO VISUAL */
-            display: inline-block;
-            padding-bottom: 10px;
+            display: inline-block; padding-bottom: 10px;
             /* border-bottom REMOVIDO PARA EVITAR CANSANCIO VISUAL */
             margin-bottom: 40px; max-width: 800px;
         }
 
         .soporte-serio { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-top: 20px; }
         .icon-circle {
-            text-decoration: none;
-            color: #fff; display: flex; flex-direction: column;
+            text-decoration: none; color: #fff; display: flex; flex-direction: column;
             align-items: center; gap: 15px; transition: 0.4s ease;
         }
         .img-wrapper {
-            width: 90px;
-            height: 90px; display: flex; align-items: center;
+            width: 90px; height: 90px; display: flex; align-items: center;
             justify-content: center; transition: 0.4s; background: transparent;
         }
         .img-wrapper img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 2px rgba(255,255,255,0.4)); }
@@ -216,15 +201,13 @@
         .icon-circle:hover .img-wrapper { transform: scale(1.2) translateY(-10px); }
 
         .menu-wrapper {
-            position: sticky;
-            top: 0; z-index: 1100;
+            position: sticky; top: 0; z-index: 1100;
             background: rgba(0, 0, 0, 0.85); border-bottom: 2px solid var(--accent);
             padding: 10px 0; backdrop-filter: blur(10px);
         }
         .menu { display: flex; justify-content: center; gap: 5px; flex-wrap: wrap; }
         .menu button {
-            background: none;
-            border: none; color: #fff;
+            background: none; border: none; color: #fff;
             padding: 12px 20px; cursor: pointer; font-family: 'Orbitron';
             font-size: 10px; font-weight: bold; transition: 0.3s;
             border-left: 1px solid var(--accent-dim); display: flex; align-items: center; gap: 8px;
@@ -237,8 +220,7 @@
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; }
 
         .card {
-            background: var(--glass);
-            border-top: 3px solid var(--accent);
+            background: var(--glass); border-top: 3px solid var(--accent);
             border-left: 1px solid var(--accent-dim); padding: 25px; border-radius: 0 20px 0 20px;
             transition: 0.4s; position: relative;
         }
@@ -251,8 +233,7 @@
         }
         .staff-card { text-align: center; }
         .avatar {
-            width: 110px;
-            height: 110px; margin: 0 auto 15px; border: 2px solid var(--accent);
+            width: 110px; height: 110px; margin: 0 auto 15px; border: 2px solid var(--accent);
             /* [CORREGIDO] Outline dinámico */
             outline: 3px solid var(--accent-dim);
             outline-offset: 4px; border-radius: 15px; padding: 5px; transition: 0.4s; overflow: hidden;
@@ -261,102 +242,69 @@
         .avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 10px; }
 
         .media-box {
-            position: relative;
-            width: 100%; padding-top: 56.25%; background: #000;
+            position: relative; width: 100%; padding-top: 56.25%; background: #000;
             margin: 15px 0; border: 1px solid var(--accent-dim); overflow: hidden; border-radius: 5px;
         }
         .media-box iframe, .media-box img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
         .media-box img { cursor: zoom-in; }
         .media-box:not(.video-box)::after {
-            content: '\f00e';
-            font-family: 'Font Awesome 6 Free'; font-weight: 900;
+            content: '\f00e'; font-family: 'Font Awesome 6 Free'; font-weight: 900;
             position: absolute; top: 10px; right: 10px; background: var(--accent);
-            color: #000; width: 30px;
-            height: 30px; display: flex; align-items: center;
+            color: #000; width: 30px; height: 30px; display: flex; align-items: center;
             justify-content: center; border-radius: 5px; font-size: 14px; opacity: 0.7; pointer-events: none;
         }
         .video-box { cursor: pointer; }
         .play-button {
-            position: absolute;
-            top: 50%; left: 50%; transform: translate(-50%, -50%);
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
             width: 60px; height: 40px; background: var(--accent); border-radius: 10px;
-            display: flex; align-items: center;
-            justify-content: center; z-index: 2;
+            display: flex; align-items: center; justify-content: center; z-index: 2;
         }
         .play-button::after { content: ''; border-left: 15px solid #fff; border-top: 10px solid transparent; border-bottom: 10px solid transparent; }
 
         .card h3 { 
-            font-family: 'Orbitron', sans-serif;
-            color: var(--accent); margin-bottom: 0px; /* Reducido para la linea */
-            text-transform: uppercase;
-            font-weight: 900; font-size: 1.4rem; letter-spacing: 2px;
+            font-family: 'Orbitron', sans-serif; color: var(--accent); margin-bottom: 0px; /* Reducido para la linea */
+            text-transform: uppercase; font-weight: 900; font-size: 1.4rem; letter-spacing: 2px;
         }
 
         /* --- [NUEVO] LINEA SEPARADORA & ETIQUETAS --- */
         .card-separator {
-            width: 100%;
-            height: 2px;
+            width: 100%; height: 2px;
             background: linear-gradient(90deg, transparent, var(--accent), transparent);
-            margin: 10px 0 15px 0;
-            box-shadow: 0 0 5px var(--accent);
-            opacity: 0.8;
+            margin: 10px 0 15px 0; box-shadow: 0 0 5px var(--accent); opacity: 0.8;
         }
         
-        .tags-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-bottom: 12px;
-        }
+        .tags-container { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
         
         .tag-badge {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 9px;
-            font-weight: bold;
-            color: #fff;
-            background: rgba(0,0,0,0.5);
-            border: 1px solid var(--accent-dim);
-            padding: 3px 8px;
-            border-radius: 4px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: 0.3s;
+            font-family: 'Orbitron', sans-serif; font-size: 9px; font-weight: bold; color: #fff;
+            background: rgba(0,0,0,0.5); border: 1px solid var(--accent-dim); padding: 3px 8px;
+            border-radius: 4px; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;
         }
         
-        .tag-badge:hover {
-            border-color: var(--accent);
-            background: var(--accent-transparent);
-            box-shadow: 0 0 5px var(--accent-dim);
-        }
+        .tag-badge:hover { border-color: var(--accent); background: var(--accent-transparent); box-shadow: 0 0 5px var(--accent-dim); }
         /* ------------------------------------------- */
 
         .download-link, .buy-link {
-            display: block;
-            width: 100%; padding: 12px; text-align: center;
+            display: block; width: 100%; padding: 12px; text-align: center;
             text-decoration: none; font-weight: bold; font-family: 'Orbitron'; font-size: 0.8rem;
-            margin-top: 15px;
-            clip-path: polygon(5% 0, 100% 0, 95% 100%, 0% 100%); transition: 0.3s;
+            margin-top: 15px; clip-path: polygon(5% 0, 100% 0, 95% 100%, 0% 100%); transition: 0.3s;
         }
         .download-link { background: var(--accent); color: #000; }
         .buy-link { background: var(--success); color: #000; }
 
         .encontrarnos {
-            margin-top: 80px;
-            padding: 40px; 
+            margin-top: 80px; padding: 40px; 
             /* [CORREGIDO] Fondo dinámico muy sutil */
-            background: var(--accent-transparent);
-            border: 1px dashed var(--accent-dim); text-align: center; border-radius: 20px;
+            background: var(--accent-transparent); border: 1px dashed var(--accent-dim); text-align: center; border-radius: 20px;
         }
         .encontrarnos h2 { font-family: 'Orbitron'; color: var(--accent); margin-bottom: 25px; letter-spacing: 3px; }
         
         .social-links { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
         
         .social-btn {
-            padding: 12px 25px;
-            color: #fff; text-decoration: none; font-family: 'Orbitron';
+            padding: 12px 25px; color: #fff; text-decoration: none; font-family: 'Orbitron';
             font-size: 12px; border: 1px solid var(--accent); transition: 0.4s;
-            display: flex; align-items: center; gap: 10px;
-            background: rgba(0, 0, 0, 0.5);
+            display: flex; align-items: center; gap: 10px; background: rgba(0, 0, 0, 0.5);
         }
 
         .social-btn:hover { background: var(--accent); color: #000; box-shadow: 0 0 20px var(--accent-glow); }
@@ -365,61 +313,35 @@
         
         /* DISCORD ESTILO (Azul) */
         .social-btn.discord-style { border-color: var(--discord); color: var(--discord); }
-        .social-btn.discord-style:hover { 
-            background: var(--discord);
-            color: #fff; 
-            box-shadow: 0 0 20px var(--discord), 0 0 40px var(--discord);
-            /* Destello doble */
-        }
+        .social-btn.discord-style:hover { background: var(--discord); color: #fff; box-shadow: 0 0 20px var(--discord), 0 0 40px var(--discord); /* Destello doble */ }
 
         /* YOUTUBE ESTILO (Rojo) */
         .social-btn.youtube-style { border-color: var(--youtube); color: var(--youtube); }
-        .social-btn.youtube-style:hover { 
-            background: var(--youtube);
-            border-color: var(--youtube); color: #fff; 
-            box-shadow: 0 0 20px var(--youtube), 0 0 40px var(--youtube);
-            /* Destello doble */
-        }
+        .social-btn.youtube-style:hover { background: var(--youtube); border-color: var(--youtube); color: #fff; box-shadow: 0 0 20px var(--youtube), 0 0 40px var(--youtube); /* Destello doble */ }
 
         /* WHATSAPP ESTILO (Verde) */
         .social-btn.whatsapp-style { border-color: var(--whatsapp); color: var(--whatsapp); }
-        .social-btn.whatsapp-style:hover { 
-            background: var(--whatsapp);
-            border-color: var(--whatsapp); color: #fff; 
-            box-shadow: 0 0 20px var(--whatsapp), 0 0 40px var(--whatsapp);
-            /* Destello doble */
-        }
+        .social-btn.whatsapp-style:hover { background: var(--whatsapp); border-color: var(--whatsapp); color: #fff; box-shadow: 0 0 20px var(--whatsapp), 0 0 40px var(--whatsapp); /* Destello doble */ }
 
         /* INSTAGRAM ESTILO (Magenta) */
         .social-btn.instagram-style { border-color: var(--instagram); color: var(--instagram); }
-        .social-btn.instagram-style:hover { 
-            background: var(--instagram);
-            border-color: var(--instagram); color: #fff; 
-            box-shadow: 0 0 20px var(--instagram), 0 0 40px var(--instagram);
-            /* Destello doble */
-        }
+        .social-btn.instagram-style:hover { background: var(--instagram); border-color: var(--instagram); color: #fff; box-shadow: 0 0 20px var(--instagram), 0 0 40px var(--instagram); /* Destello doble */ }
 
         /* NUEVO ESTILO DEL REPRODUCTOR DE MÚSICA */
         .player-bar {
-            position: fixed;
-            bottom: 25px; left: 25px;
-            background: rgba(10, 10, 10, 0.9);
-            border: 1px solid var(--accent); border-radius: 50px;
-            padding: 10px 25px 10px 15px;
-            display: none; align-items: center; gap: 15px;
+            position: fixed; bottom: 25px; left: 25px;
+            background: rgba(10, 10, 10, 0.9); border: 1px solid var(--accent); border-radius: 50px;
+            padding: 10px 25px 10px 15px; display: none; align-items: center; gap: 15px;
             z-index: 10001; box-shadow: 0 0 20px rgba(0,0,0,0.8), 0 0 10px var(--accent-dim);
-            backdrop-filter: blur(15px);
-            transition: all 0.3s ease;
+            backdrop-filter: blur(15px); transition: all 0.3s ease;
         }
         .player-bar:hover { box-shadow: 0 0 25px var(--accent-glow); transform: translateY(-2px); }
 
         /* Botón Play */
         #btn-music { 
-            background: var(--accent);
-            border: none; color: #000; 
+            background: var(--accent); border: none; color: #000; 
             width: 45px; height: 45px; cursor: pointer; border-radius: 50%; 
-            display: flex; align-items: center; justify-content: center;
-            font-size: 18px;
+            display: flex; align-items: center; justify-content: center; font-size: 18px;
             box-shadow: 0 0 10px var(--accent-glow); transition: 0.3s;
         }
         #btn-music:hover { transform: scale(1.1); background: #fff; }
@@ -427,10 +349,8 @@
         /* Slider de Volumen */
         input[type="range"] { -webkit-appearance: none; width: 80px; height: 4px; background: rgba(255,255,255,0.2); border-radius: 5px; outline: none; }
         input[type="range"]::-webkit-slider-thumb { 
-            -webkit-appearance: none;
-            width: 18px; /* [MEJORA ANDROID] Un poco más grande para dedos */
-            height: 18px;
-            border-radius: 50%; background: var(--accent);
+            -webkit-appearance: none; width: 18px; /* [MEJORA ANDROID] Un poco más grande para dedos */
+            height: 18px; border-radius: 50%; background: var(--accent);
             cursor: pointer; box-shadow: 0 0 10px var(--accent); transition: 0.2s;
         }
         input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.3); }
@@ -438,27 +358,22 @@
         /* Ecualizador REAL */
         .equalizer { display: flex; align-items: flex-end; height: 25px; gap: 3px; margin-left: 5px; }
         .bar {
-            width: 5px;
-            background: var(--accent); border-radius: 2px;
+            width: 5px; background: var(--accent); border-radius: 2px;
             height: 4px; transition: height 0.05s linear; box-shadow: 0 0 5px var(--accent);
         }
 
         .player-label {
-            font-size: 10px;
-            font-family: 'Orbitron'; color: #fff; font-weight: bold; letter-spacing: 1px;
+            font-size: 10px; font-family: 'Orbitron'; color: #fff; font-weight: bold; letter-spacing: 1px;
             display: flex; flex-direction: column; line-height: 1.2;
         }
 
         .zoom-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.95); display: none;
-            justify-content: center; align-items: center;
-            z-index: 20000; cursor: zoom-out; backdrop-filter: blur(15px);
+            justify-content: center; align-items: center; z-index: 20000; cursor: zoom-out; backdrop-filter: blur(15px);
         }
         .zoom-overlay img {
-            max-width: 90%;
-            max-height: 85%; border: 4px solid var(--accent);
+            max-width: 90%; max-height: 85%; border: 4px solid var(--accent);
             border-radius: 15px; box-shadow: 0 0 40px var(--accent-glow);
             animation: zoomIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), neonBlink 2s infinite alternate;
         }
@@ -470,15 +385,11 @@
         
         /* TOAST Y BADGES */
         .copy-toast {
-            position: fixed;
-            top: 20px; right: 20px; 
+            position: fixed; top: 20px; right: 20px; 
             background: var(--pass-color) !important; /* Ahora sigue el color del tema */
-            color: #000;
-            padding: 10px 25px; font-family: 'Orbitron'; font-weight: bold; font-size: 12px;
-            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
-            display: none;
-            z-index: 30000; animation: slideIn 0.3s ease;
-            box-shadow: 0 0 20px var(--accent-dim);
+            color: #000; padding: 10px 25px; font-family: 'Orbitron'; font-weight: bold; font-size: 12px;
+            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%); display: none;
+            z-index: 30000; animation: slideIn 0.3s ease; box-shadow: 0 0 20px var(--accent-dim);
             /* [CORREGIDO] Eliminado el borde blanco feo de las esquinas */
             border: none;
         }
@@ -487,10 +398,8 @@
         /* [CORREGIDO] Badge de contraseña ahora es dinámico */
         .pass-badge { cursor: copy; transition: 0.3s; padding: 2px 6px; border-radius: 4px; display: inline-block; }
         .pass-badge:hover { 
-            background: rgba(255, 255, 255, 0.2);
-            color: #fff !important; 
-            text-shadow: 0 0 10px var(--pass-color);
-            transform: translateY(-1px);
+            background: rgba(255, 255, 255, 0.2); color: #fff !important; 
+            text-shadow: 0 0 10px var(--pass-color); transform: translateY(-1px);
         }
     </style>
 </head>
@@ -529,6 +438,7 @@
             <button onclick="tab('aportes', this)"><i class="fas fa-box-open"></i> APORTES</button>
             <button onclick="tab('datas', this)"><i class="fas fa-database"></i> DATAS</button>
             <button onclick="tab('tops', this)"><i class="fas fa-star"></i> TENDENCIA</button>
+           
             <button onclick="tab('venta', this)"><i class="fas fa-shopping-cart"></i> REALIZA TUS COMPRAS AQUI</button>
         </div>
     </div>
@@ -551,12 +461,13 @@
             <h2>¡¡ AQUÍ NUESTRAS PLATAFORMAS OFICIALES !!</h2>
             <div class="social-links">
                 <a href="https://discord.gg/ChGc4eDcQ7" target="_blank" class="social-btn discord-style"><i class="fab fa-discord"></i> DISCORD</a>
-                
+             
                 <a href="https://www.youtube.com/@Yith.7" target="_blank" class="social-btn youtube-style"><i class="fab fa-youtube"></i> YOUTUBE</a>
                 
                 <a href="https://wa.me/+584125057144" target="_blank" class="social-btn whatsapp-style"><i class="fab fa-whatsapp"></i> WHATSAPP</a>
 
                 <a href="POR DEFINIR EL LINK" target="_blank" class="social-btn instagram-style"><i class="fab fa-instagram"></i> INSTAGRAM</a>
+         
             </div>
         </div>
     </div>
@@ -585,7 +496,7 @@ const DATA = {
     equipo: [
         {n: "𝑆𝑜𝑘𝑜𝑜", r: "𝑳𝑨 𝑳𝑬𝒀𝑬𝑵𝑫𝑨", a: "https://i.postimg.cc/MpTPrNxL/IMG_6432.jpg"},
         {n: "𝑀𝑜𝑡𝑖𝑛ℎ𝑎", r: "𝑶𝑾𝑵𝑬𝑹𝑺", a: "https://i.postimg.cc/cLzSDQqg/IMG_6439.jpg"},
-        {n: "𝑃𝑎𝑡𝑟𝑖𝑐𝑘", r: "𝑶𝑾𝑵𝑬𝑹𝑺", a: "https://i.postimg.cc/fRPNHx4d/IMG_6440.jpg"},
+        {n: "𝑃𝑎𝑡𝑟𝑖𝑐𝑘", r: "𝑶𝑾𝑵𝑬𝑹𝑺", a: "https://i.postimg.cc/fRPNHx4d/IMG_6440.jpg"}, 
         {n: "𝐾𝑟𝑎𝑢𝑠𝑒𝑟", r: "𝑶𝑾𝑵𝑬𝑹𝑺", a: "https://i.postimg.cc/jdWvHNhB/IMG-6442.jpg"},
         {n: "𝐸𝑙𝐶ℎ𝑖𝑘𝑜𝐷𝑒𝐿𝑎𝑠𝑃𝑜𝑒𝑠𝑖𝑎𝑠", r: "𝑶𝑾𝑵𝑬𝑹𝑺", a: "https://i.postimg.cc/SsrQ1BQT/1222.png"},
         {n: "𝑅𝑖𝑜 𝐹𝑒𝑟𝑑𝑖𝑛𝑎𝑛𝑑", r: "𝑶𝑾𝑵𝑬𝑹𝑺", a: "https://i.postimg.cc/6pDGnGKq/rio-ferdinand.png"},
@@ -611,7 +522,6 @@ const DATA = {
     ],
     venta: []
 };
-
 // LÓGICA PARA CAMBIAR EL COLOR + PERSISTENCIA
 let currentThemeIndex = localStorage.getItem('savedThemeIdx') ? parseInt(localStorage.getItem('savedThemeIdx')) : 0;
 // [MEJORADO] Se agregan colores base y transparente para efectos de brillo (destello)
@@ -622,7 +532,6 @@ const themes = [
     { primary: '#ffcc00', dim: 'rgba(255, 204, 0, 0.5)', transparent: 'rgba(255, 204, 0, 0.05)' }, // Gold
     { primary: '#ff0000', dim: 'rgba(255, 0, 0, 0.5)', transparent: 'rgba(255, 0, 0, 0.05)' }     // Red
 ];
-
 function applyTheme(index) {
     const theme = themes[index];
     const root = document.documentElement.style;
@@ -644,17 +553,17 @@ function changeTheme() {
     currentThemeIndex = (currentThemeIndex + 1) % themes.length;
     applyTheme(currentThemeIndex);
     localStorage.setItem('savedThemeIdx', currentThemeIndex);
-    document.getElementById('click-sound').play();
+    
+    // [MEJORA INYECTADA] Sonido original de cambio de tema desactivado
+    // document.getElementById('click-sound').play();
 }
 
 const canvas = document.getElementById('cyber-canvas');
 const ctx = canvas.getContext('2d');
 let width, height;
-
 function resize() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; }
 window.addEventListener('resize', resize);
 resize();
-
 function loop() {
     ctx.clearRect(0, 0, width, height);
     ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--accent') + '33';
@@ -673,7 +582,6 @@ if(savedVol !== null) {
 
 // [INYECTADO MEJORADO] Lógica Web Audio API con GainNode para Android/iOS
 let audioContext, analyser, dataArray, source, gainNode;
-
 // Agregado gainNode
 
 function setupRealVisualizer() {
@@ -710,7 +618,6 @@ function animateBars() {
     
     const bars = document.querySelectorAll('.equalizer .bar');
     if(bars.length < 3) return;
-    
     // Bajos, Medios, Altos
     const val1 = dataArray[2] / 255; 
     const val2 = dataArray[6] / 255;
@@ -720,7 +627,6 @@ function animateBars() {
     bars[0].style.height = Math.max(4, val1 * 25) + 'px';
     bars[1].style.height = Math.max(4, val2 * 35) + 'px';
     bars[2].style.height = Math.max(4, val3 * 25) + 'px';
-    
     bars.forEach((b, i) => {
         const intensity = [val1, val2, val3][i];
         b.style.opacity = 0.5 + (intensity * 0.5);
@@ -793,7 +699,6 @@ function filterContent() {
             card.style.display = "none";
         }
     });
-
     const noResMsg = document.getElementById('no-results');
     if (visibleCount === 0) {
         noResMsg.style.display = 'block';
@@ -808,7 +713,6 @@ function tab(type, btn) {
     
     document.getElementById('mod-search').value = "";
     document.getElementById('no-results').style.display = 'none';
-    
     const searchBar = document.getElementById('search-bar-container');
     const container = document.getElementById('grid-content');
     const header = document.getElementById('seccion-header');
@@ -828,6 +732,7 @@ function tab(type, btn) {
             <div class="txt-pedidos-inyectado">“REALIZA TUS PEDIDOS CON CONFIANZA, COMPARTE TUS COMENTARIOS Y SEÑALA CON CLARIDAD LO QUE BUSCAS AL MOMENTO DE TU COMPRA. CADA DETALLE QUE NOS DES, LO TRANSFORMAMOS EN UNA EXPERIENCIA HECHA A TU MEDIDA”</div>
             <div class="soporte-serio">
                 <a href="https://discord.gg/ChGc4eDcQ7" target="_blank" class="icon-circle ds-c">
+                   
                     <div class="img-wrapper">
                         <img src="https://i.postimg.cc/0ymK4Pq8/3670157.png" alt="Discord">
                     </div>
@@ -838,6 +743,7 @@ function tab(type, btn) {
                     <div class="img-wrapper">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
                     </div>
+             
                     <span>WHATSAPP</span>
                 </a>
             </div>
@@ -851,16 +757,23 @@ function tab(type, btn) {
             if(type === 'equipo') {
                 container.innerHTML += `<div class="card staff-card"><div class="avatar"><img src="${i.a}" loading="lazy"></div><h3>${i.n}</h3><div style="font-size:10px; color:#ffffff; font-weight:bold; letter-spacing:1px;">${i.r}</div></div>`;
             } else {
-                let media = i.v ? `<div class="media-box video-box" onclick="loadVideo(this, '${i.v}')"><img class="video-thumbnail" src="https://i.ytimg.com/vi/${i.v}/hqdefault.jpg" loading="lazy"><div class="play-button"></div></div>` : (i.img ? `<div class="media-box"><img src="${i.img}" alt="Preview" onclick="openZoom('${i.img}')" loading="lazy"></div>` : '');
+                
+                // [CÓDIGO ORIGINAL DESACTIVADO]
+                // let media = i.v ? `<div class="media-box video-box" onclick="loadVideo(this, '${i.v}')"><img class="video-thumbnail" src="https://i.ytimg.com/vi/${i.v}/hqdefault.jpg" loading="lazy"><div class="play-button"></div></div>` : (i.img ? `<div class="media-box"><img src="${i.img}" alt="Preview" onclick="openZoom('${i.img}')" loading="lazy"></div>` : '');
+                
+                // [MEJORA INYECTADA] Carga directa del iFrame. Reemplaza cualquier url base por el ID en caso de que lo coloques completo
+                let media = i.v ? `<div class="media-box"><iframe src="https://www.youtube.com/embed/${i.v.replace('https://youtu.be/', '').replace('https://www.youtube.com/watch?v=', '')}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>` : (i.img ? `<div class="media-box"><img src="${i.img}" alt="Preview" onclick="openZoom('${i.img}')" loading="lazy"></div>` : '');
                 
                 // [CORREGIDO] Pass ahora usa la variable dinámica global, no estática
                 let pass = i.p ? `<p style="font-size:13px; margin:8px 0; color:#fff;"><b style="font-family:'Orbitron'; font-weight:900;">CONTRASEÑA:</b> <span class="pass-badge" onclick="copyPass('${i.p}')" style="color:var(--pass-color); font-weight: 900; font-size: 14px; text-shadow: 0 0 5px var(--pass-color);"><i class="fas fa-copy" style="margin-right:5px; font-size:11px;"></i>${i.p}</span></p>` : '';
+                
                 let creator = `<p style="font-size:13px; margin:8px 0; color:#fff;"><b style="font-family:'Orbitron'; font-weight:900;">CREADOR:</b> <span style="font-weight: 900; color: var(--accent); font-size: 14px; text-transform: uppercase;">${i.c}</span></p>`;
 
                 // [NUEVO] Generar HTML de etiquetas
                 let tagsHtml = '';
                 if(i.tags && i.tags.length > 0) {
                     tagsHtml = '<div class="tags-container">';
+               
                     i.tags.forEach(tag => {
                         tagsHtml += `<span class="tag-badge">${tag}</span>`;
                     });
@@ -871,11 +784,13 @@ function tab(type, btn) {
                     <div class="card">
                         <h3>${i.t}</h3>
                         <div class="card-separator"></div> ${tagsHtml} ${creator}
+                  
                         ${pass}
                         ${media}
                         <a href="${i.d}" class="download-link" target="_blank"><i class="fas fa-download" style="margin-right:5px;"></i> DESCARGAR</a>
                     </div>`;
             }
+       
         });
     }
 }
@@ -887,8 +802,7 @@ function toggleAudio() {
         // Si el contexto estaba suspendido, reanudarlo
         if(audioContext && audioContext.state === 'suspended') audioContext.resume();
     } 
-    else { audio.pause(); btnIcon.className = 'fas fa-play';
-    }
+    else { audio.pause(); btnIcon.className = 'fas fa-play'; }
 }
 
 // [INYECTADO MEJORADO] Función de volumen compatible con Android/iOS
@@ -904,7 +818,6 @@ function setVol(v) {
     audio.volume = v;
 }
 </script>
-<!-- Code injected by live-server -->
 <script>
 	// <![CDATA[  <-- For SVG support
 	if ('WebSocket' in window) {
@@ -936,7 +849,7 @@ function setVol(v) {
 				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
 			}
 		})();
-	}
+    }
 	else {
 		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
 	}
@@ -944,21 +857,3 @@ function setVol(v) {
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
